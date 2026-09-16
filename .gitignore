@@ -1,0 +1,12 @@
+/obj-*/
+/debian/.debhelper/
+/debian/ausweisapp/
+/debian/ausweisapp-*/
+/debian/files
+/debian/*.substvars
+/debian/*.debhelper
+
+__pycache__/
+
+/LINUX-BUILD.md
+/BUILD-INFO.json

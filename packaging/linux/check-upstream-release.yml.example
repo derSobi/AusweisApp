@@ -1,0 +1,28 @@
+name: Neue Upstream-Version prüfen
+on:
+  schedule:
+    - cron: '23 6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: ausweisapp-upstream-pruefung
+  cancel-in-progress: false
+jobs:
+  pruefen:
+    if: github.repository == 'derSobi/AusweisApp'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Prüfer aus dem genauen Workflow-Commit laden und ausführen
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OWN_REPOSITORY: ${{ github.repository }}
+          OWN_COMMIT: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/$OWN_REPOSITORY/contents/.github/scripts/check-upstream-release.py?ref=$OWN_COMMIT" \
+            -H 'Accept: application/vnd.github.raw+json' > "$RUNNER_TEMP/check-upstream-release.py"
+          python3 "$RUNNER_TEMP/check-upstream-release.py"

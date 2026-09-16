@@ -1,0 +1,6 @@
+ausweisapp (2.5.5-0build1~ubuntu26.04) resolute; urgency=medium
+
+  * Linux-Paketierung mit Qt für amd64 auf Basis von AusweisApp 2.5.5.
+  * Einheitliche Versionierung: UPSTREAM-0buildN~ubuntuXX.04.
+
+ -- derSobi <14218571+derSobi@users.noreply.github.com>  Wed, 16 Sep 2026 21:30:00 +0200

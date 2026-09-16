@@ -1,0 +1,29 @@
+Source: ausweisapp
+Section: utils
+Priority: optional
+Maintainer: derSobi <14218571+derSobi@users.noreply.github.com>
+Build-Depends: debhelper-compat (= 13), cmake, ninja-build, pkg-config,
+ gcc-12, g++-12, python3, libssl-dev, libpcsclite-dev, libudev-dev,
+ libgl1-mesa-dev, libegl1-mesa-dev, libxkbcommon-dev, libxkbcommon-x11-dev,
+ libxcb-cursor-dev, libxcb-icccm4-dev, libxcb-image0-dev, libxcb-keysyms1-dev,
+ libxcb-randr0-dev, libxcb-render-util0-dev, libxcb-shape0-dev, libxcb-shm0-dev,
+ libxcb-sync-dev, libxcb-xfixes0-dev, libxcb-xinerama0-dev, libxcb-xkb-dev,
+ libxcb-util-dev, libx11-xcb-dev, libfontconfig1-dev, libfreetype6-dev,
+ libdbus-1-dev, libwayland-dev, libwayland-egl-backend-dev, wayland-protocols,
+ libinput-dev, libjpeg-dev, libpng-dev, zlib1g-dev, libpcre2-dev,
+ libharfbuzz-dev, libzstd-dev, libb2-dev, libdouble-conversion-dev, libvulkan-dev
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+Homepage: https://github.com/Governikus/AusweisApp
+
+Package: ausweisapp
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: pcscd, libccid
+Breaks: ausweisapp2 (<< 2.0.0-1~)
+Replaces: ausweisapp2 (<< 2.0.0-1~)
+Description: community build of the German eID client
+ AusweisApp supports online identification using German ID cards
+ and electronic residence permits. This is an independently packaged
+ community build of the upstream Qt application.
+ This package includes private Qt libraries under /usr/lib/ausweisapp.

@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export CC = gcc-12
+export CXX = g++-12
+DEPS = $(if $(PRIVATE_DEPS_CACHE),$(PRIVATE_DEPS_CACHE),$(CURDIR)/debian/.build-deps)
+QT = $(DEPS)/prefix/usr/lib/ausweisapp/qt6
+export PATH := $(DEPS)/cmake/bin:$(PATH)
+export LD_LIBRARY_PATH := $(QT)/lib
+export JOBS ?= $(or $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS))),4)
+%:
+	dh $@ --buildsystem=cmake+ninja
+
+override_dh_auto_configure:
+	if [ -z "$(PRIVATE_DEPS_CACHE)" ]; then CMAKE=/usr/bin/cmake debian/build-private-deps.sh $(CURDIR) $(DEPS); else test -f "$(QT)/lib/cmake/Qt6/Qt6Config.cmake"; fi
+	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DVENDOR= -DCMAKE_CXX_STANDARD=20 -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF -DCMAKE_PREFIX_PATH="$(QT);$(DEPS)/prefix" -DCMAKE_INSTALL_RPATH=/usr/lib/ausweisapp/qt6/lib
+
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/ausweisapp/usr/lib/ausweisapp
+	cp -a $(QT) debian/ausweisapp/usr/lib/ausweisapp/
+	rm -rf debian/ausweisapp/usr/lib/ausweisapp/qt6/doc debian/ausweisapp/usr/lib/ausweisapp/qt6/include debian/ausweisapp/usr/lib/ausweisapp/qt6/mkspecs debian/ausweisapp/usr/lib/ausweisapp/qt6/bin debian/ausweisapp/usr/lib/ausweisapp/qt6/libexec debian/ausweisapp/usr/lib/ausweisapp/qt6/lib/cmake debian/ausweisapp/usr/lib/ausweisapp/qt6/lib/pkgconfig
+	find debian/ausweisapp/usr/lib/ausweisapp/qt6 -type f \( -name '*.a' -o -name '*.prl' \) -delete
+	python3 debian/install-notices.py
+	cp llhttp/LICENSE-MIT debian/ausweisapp/usr/share/doc/ausweisapp/llhttp-LICENSE
+
+override_dh_shlibdeps:
+	dh_shlibdeps -l$(CURDIR)/debian/ausweisapp/usr/lib/ausweisapp/qt6/lib
+
+override_dh_makeshlibs:
+	# Private libraries are not a public ABI and must not provide global shlibs.
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf debian/.build-deps
+
+override_dh_auto_test:
+	# Upstream registers its tests only for Debug; run them in a separate build.

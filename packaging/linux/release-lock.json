@@ -1,0 +1,33 @@
+{
+  "upstream_url": "https://github.com/Governikus/AusweisApp.git",
+  "upstream_tag": "2.5.5",
+  "upstream_commit": "6724c548f9ab5f50d674960b5e2a736318815089",
+  "architecture": "amd64",
+  "publication_enabled": false,
+  "files": {
+    "AusweisApp-2.5.5.tar.gz": {
+      "sha256": "17584c716e52f2ba96b2a73d0c015fcf4ba081b17d86162a5dd56dd78d98b9c5"
+    },
+    "cmake-3.31.6.tar.gz": {
+      "sha256": "653427f0f5014750aafff22727fb2aa60c6c732ca91808cfb78ce22ddd9e55f0"
+    },
+    "llhttp-9.4.2.tar.gz": {
+      "sha256": "ba717a2f99f340a0ee9796aaf2b1acca057e1e37682ffd2bc4def4d3b6bc4005"
+    },
+    "qt-everywhere-src-6.10.2.tar.xz": {
+      "sha256": "c3df0f0e421130cc52ed81cb712358804471ce9bd2a41d97828f9f5b1bf7fed2"
+    },
+    "linuxdeploy-x86_64.AppImage": {
+      "sha256": "36a2d7e274d12e1050d0e9ecfe11d339ed54720b2bec464c286d53f8b07f5c62"
+    },
+    "linuxdeploy-plugin-qt-x86_64.AppImage": {
+      "sha256": "cfc1055b2b9dbc08412b579f20990b7b41a17b61beaa5847dc9477c96c9e9617"
+    },
+    "runtime-x86_64": {
+      "sha256": "1cc49bcf1e2ccd593c379adb17c9f85a36d619088296504de95b1d06215aebbf"
+    }
+  },
+  "user_supplied_archive_sha256": "e18e781ae0250690c68db4c2de67b53b33e826de98377167842fd635a471dfab",
+  "source_date_epoch": 1786688840,
+  "debian_revision": "0build1"
+}

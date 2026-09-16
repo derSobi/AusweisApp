@@ -1,0 +1,17 @@
+ARG UBUNTU_VERSION=22.04
+FROM ubuntu:${UBUNTU_VERSION}
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential gcc-12 g++-12 cmake ninja-build pkg-config git curl ca-certificates \
+    python3 debhelper dpkg-dev fakeroot file patchelf \
+    libssl-dev libpcsclite-dev libudev-dev libgl1-mesa-dev libegl1-mesa-dev \
+    libxkbcommon-dev libxkbcommon-x11-dev libxcb-cursor-dev libxcb-icccm4-dev \
+    libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render-util0-dev \
+    libxcb-shape0-dev libxcb-shm0-dev libxcb-sync-dev libxcb-xfixes0-dev \
+    libxcb-xinerama0-dev libxcb-xkb-dev libxcb-util-dev libx11-xcb-dev \
+    libfontconfig1-dev libfreetype6-dev libdbus-1-dev libwayland-dev \
+    libwayland-egl-backend-dev wayland-protocols libinput-dev \
+    libjpeg-dev libpng-dev zlib1g-dev libpcre2-dev libharfbuzz-dev \
+    libzstd-dev libb2-dev libdouble-conversion-dev libvulkan-dev \
+    && rm -rf /var/lib/apt/lists/*
+ENV CC=gcc-12 CXX=g++-12

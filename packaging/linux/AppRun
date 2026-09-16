@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+appdir=$(cd -- "$(dirname -- "$0")" && pwd)
+# QStandardPaths must find the resource bundle installed below usr/share.
+export XDG_DATA_DIRS="$appdir/usr/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+exec "$appdir/usr/bin/AusweisApp" "$@"

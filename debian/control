@@ -1,0 +1,30 @@
+Source: ausweisapp
+Section: utils
+Priority: optional
+Maintainer: derSobi <14218571+derSobi@users.noreply.github.com>
+Build-Depends: debhelper-compat (= 13), cmake (>= 3.25), ninja-build,
+ pkg-config, qt6-base-dev (>= 6.8), qt6-declarative-dev (>= 6.8),
+ qt6-tools-dev (>= 6.8), qt6-tools-dev-tools, qt6-svg-dev (>= 6.8),
+ qt6-websockets-dev (>= 6.8), qt6-scxml-dev (>= 6.8),
+ libssl-dev, libllhttp-dev, libpcsclite-dev, libudev-dev
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+Homepage: https://github.com/Governikus/AusweisApp
+
+Package: ausweisapp
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libqt6svg6, qt6-svg-plugins, qml6-module-qt-labs-platform, qml6-module-qtcore,
+ qml6-module-qtqml, qml6-module-qtqml-models,
+ qml6-module-qtqml-statemachine, qml6-module-qtqml-workerscript,
+ qml6-module-qtquick, qml6-module-qtquick-controls,
+ qml6-module-qtquick-dialogs, qml6-module-qtquick-effects,
+ qml6-module-qtquick-layouts, qml6-module-qtquick-templates,
+ qml6-module-qtquick-window, qt6-qpa-plugins
+Recommends: pcscd, libccid, qt6-wayland
+Breaks: ausweisapp2 (<< 2.0.0-1~)
+Replaces: ausweisapp2 (<< 2.0.0-1~)
+Description: community build of the German eID client
+ AusweisApp supports online identification using German ID cards
+ and electronic residence permits. This is an independently packaged
+ community build of the upstream Qt application.
